@@ -15,11 +15,11 @@ New in this version
 from typing import Dict, Tuple, List, Sequence, Any
 import re
 import os
-from dotenv import load_dotenv            # pip install python-dotenv
-import openai                             # pip install openai
+from dotenv import load_dotenv  
+import openai                          
 
-load_dotenv()                             # reads .env at project root
-openai.api_key = os.getenv("OPENAI_API_KEY")  # raises if missing
+load_dotenv()                          
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 __all__ = ["get_target_sections"]
 
