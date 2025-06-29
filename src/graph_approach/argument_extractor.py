@@ -200,8 +200,6 @@ def _extract_components_from_chunk(
     
     COUNTERCLAIMS:
     - Opposing arguments, limitations, or objections that the paper addresses
-    - Can include entire sections discussing alternative viewpoints or potential issues
-    - Look for statements that present opposing views or acknowledge limitations
     - Examples: "However, some argue that...", "A potential limitation is...", "Critics suggest..."
     
     BACKGROUND:
@@ -239,7 +237,7 @@ def _extract_components_from_chunk(
     - Focus on the most significant and well-developed argumentative elements
     - Focus on high-quality, meaningful components that contribute to the argument structure
     - Ensure each component has clear justification for its classification
-    - Aim to extract at least 25 components
+    - Aim to extract at least 15 components
     """
     
     try:
@@ -448,7 +446,8 @@ def _extract_relationships_from_chunk(
     - Connect components that are only superficially related
     
     Quality over quantity:
-    - Aim to extract at least 20 relationships
+    - Aim to extract at least 10 relationships or however many are meaningful
+    - Focus on high-quality, non-trivial relationships that enhance understanding
     - Focus on high-quality, meaningful relationships
     - Each relationship should provide clear insight into the paper's logic
     - Ensure relationships are well-justified and specific

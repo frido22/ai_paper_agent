@@ -1,0 +1,24 @@
+{
+  "document_info": {
+    "document_name": "ResearchPaper.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmpvcgl0m_e/ResearchPaper.pdf",
+    "source_id": null,
+    "start_date_effect": null,
+    "end_date_effect": null,
+    "date_publication": null,
+    "date_ingestion": "2025-06-29"
+  },
+  "file_metadata": {
+    "name": "ResearchPaper.pdf",
+    "size": "140823"
+  },
+  "content_hash": "f8ee2243ed68a3fd90c5cfe6e1b27585beb87a02bc00b6bd54a91fa82131cfde",
+  "processing_timestamp": "2025-06-29T17:54:32.304639",
+  "processing_stats": {
+    "total_pages": 6,
+    "pages_with_tables": 0,
+    "pages_with_text": 6,
+    "total_table_count": 0,
+    "total_text_length": 20485
+  }
+}

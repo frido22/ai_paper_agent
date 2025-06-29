@@ -15,14 +15,19 @@ __all__ = ["score"]
 _OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
 
 _PROMPT_TEMPLATE = (
-    """You are an expert reviewer for scientific articles. On a scale from 0 to 100 "
-    "rate how well the CONCLUSION section is fully supported by the RESULTS section. "
+    """You are an expert reviewer for scientific articles. On a scale from 0 to 100, "
+    "rate the overall consistency and coherence of this paper. Evaluate how well the "
+    "conclusions are supported by the results, how logical the argumentation is, and "
+    "how well the different sections connect together. "
     "Give a brief justification on the score you gave."
     "Return strictly JSON with keys 'score' (int) and 'justification'."""
 )
 
 
-def _build_messages(results: str, conclusion: str) -> list[dict]:
+def _build_messages(page_data) -> list[dict]:
+    # Extract text from all pages
+    full_text = "\n".join(page.get("text", "") for page in page_data)
+    
     messages = [
         {
             "role": "system",
@@ -30,16 +35,16 @@ def _build_messages(results: str, conclusion: str) -> list[dict]:
         },
         {
             "role": "user",
-            "content": f"RESULTS:\n{results}\n\nCONCLUSION:\n{conclusion}",
+            "content": f"PAPER TEXT:\n{full_text}",
         },
     ]
     return messages
 
 
-def score(results: str, conclusion: str) -> Tuple[int, str]:
+def score(page_data) -> Tuple[int, str]:
     """Return (score, justification) by querying the OpenAI chat endpoint."""
     client = OpenAI()
-    messages = _build_messages(results, conclusion)
+    messages = _build_messages(page_data)
     response = client.chat.completions.create(
         model=_OPENAI_MODEL,
         messages=messages,

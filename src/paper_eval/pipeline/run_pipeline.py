@@ -30,7 +30,7 @@ def _process(pages_json_path: Path) -> Dict[str, Any]:
     
     results, conclusion, fig_caps = get_target_sections(pages_data)
     
-    numeric_score, justification = score(results, conclusion)
+    numeric_score, justification = score(pages_data)
     #support_map = supports(conclusion, fig_caps)
 
     return {

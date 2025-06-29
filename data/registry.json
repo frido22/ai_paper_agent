@@ -12,5 +12,103 @@
     "total_text_length": 65397,
     "total_tables_count": 1,
     "processed_output_dir": "data/processed/87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd"
+  },
+  "7557a689a83f4eb85d5ad4c981cb89b1de69a939b11368ee49160c765c93240e": {
+    "document_name": "2302.13971v1.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmprfa2yhnu/2302.13971v1.pdf",
+    "content_hash": "7557a689a83f4eb85d5ad4c981cb89b1de69a939b11368ee49160c765c93240e",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "2302.13971v1.pdf",
+      "size": "726566"
+    },
+    "pages_count": 27,
+    "total_text_length": 81547,
+    "total_tables_count": 7,
+    "processed_output_dir": "data/processed/7557a689a83f4eb85d5ad4c981cb89b1de69a939b11368ee49160c765c93240e"
+  },
+  "9e005c0ee21d541f5160c14b2bf5f1a245f480978a964406623d8eb01190e5ac": {
+    "document_name": "remove (1).pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmp0kdv4uqt/remove (1).pdf",
+    "content_hash": "9e005c0ee21d541f5160c14b2bf5f1a245f480978a964406623d8eb01190e5ac",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "remove (1).pdf",
+      "size": "240269"
+    },
+    "pages_count": 10,
+    "total_text_length": 32373,
+    "total_tables_count": 0,
+    "processed_output_dir": "data/processed/9e005c0ee21d541f5160c14b2bf5f1a245f480978a964406623d8eb01190e5ac"
+  },
+  "f8ee2243ed68a3fd90c5cfe6e1b27585beb87a02bc00b6bd54a91fa82131cfde": {
+    "document_name": "ResearchPaper.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmpvcgl0m_e/ResearchPaper.pdf",
+    "content_hash": "f8ee2243ed68a3fd90c5cfe6e1b27585beb87a02bc00b6bd54a91fa82131cfde",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "ResearchPaper.pdf",
+      "size": "140823"
+    },
+    "pages_count": 6,
+    "total_text_length": 20485,
+    "total_tables_count": 0,
+    "processed_output_dir": "data/processed/f8ee2243ed68a3fd90c5cfe6e1b27585beb87a02bc00b6bd54a91fa82131cfde"
+  },
+  "6d461293a40c9888c98e7ec8b17facdd0271f8abcb906099f7ae3a6db4e672a6": {
+    "document_name": "2302.06854v1.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmpjfeajl04/2302.06854v1.pdf",
+    "content_hash": "6d461293a40c9888c98e7ec8b17facdd0271f8abcb906099f7ae3a6db4e672a6",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "2302.06854v1.pdf",
+      "size": "422097"
+    },
+    "pages_count": 7,
+    "total_text_length": 33835,
+    "total_tables_count": 6,
+    "processed_output_dir": "data/processed/6d461293a40c9888c98e7ec8b17facdd0271f8abcb906099f7ae3a6db4e672a6"
+  },
+  "48e2125e978168a9542d7b06d2abe609cb4342766cf1feff754a1dfa4934b7d5": {
+    "document_name": "2506.14909v1.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmpjinsf2q_/2506.14909v1.pdf",
+    "content_hash": "48e2125e978168a9542d7b06d2abe609cb4342766cf1feff754a1dfa4934b7d5",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "2506.14909v1.pdf",
+      "size": "9245344"
+    },
+    "pages_count": 49,
+    "total_text_length": 142998,
+    "total_tables_count": 19,
+    "processed_output_dir": "data/processed/48e2125e978168a9542d7b06d2abe609cb4342766cf1feff754a1dfa4934b7d5"
+  },
+  "761bd69434d076ef9c957cf44878744f4683b6264887019a42c2ea0c95c5ec98": {
+    "document_name": "13-IJCSE-07781-10.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmphvs1ni_0/13-IJCSE-07781-10.pdf",
+    "content_hash": "761bd69434d076ef9c957cf44878744f4683b6264887019a42c2ea0c95c5ec98",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "13-IJCSE-07781-10.pdf",
+      "size": "410992"
+    },
+    "pages_count": 3,
+    "total_text_length": 10659,
+    "total_tables_count": 4,
+    "processed_output_dir": "data/processed/761bd69434d076ef9c957cf44878744f4683b6264887019a42c2ea0c95c5ec98"
+  },
+  "4d6b984d591d2d01dcdc90d4609d2808396ed62604469be69238d8f8f1cf98df": {
+    "document_name": "cv_prog_report.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmps0j54tzb/cv_prog_report.pdf",
+    "content_hash": "4d6b984d591d2d01dcdc90d4609d2808396ed62604469be69238d8f8f1cf98df",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "cv_prog_report.pdf",
+      "size": "1989743"
+    },
+    "pages_count": 5,
+    "total_text_length": 15819,
+    "total_tables_count": 0,
+    "processed_output_dir": "data/processed/4d6b984d591d2d01dcdc90d4609d2808396ed62604469be69238d8f8f1cf98df"
   }
 }

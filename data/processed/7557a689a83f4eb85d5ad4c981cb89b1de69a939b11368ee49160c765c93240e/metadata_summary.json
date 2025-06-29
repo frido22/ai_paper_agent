@@ -1,0 +1,24 @@
+{
+  "document_info": {
+    "document_name": "2302.13971v1.pdf",
+    "document_path": "/var/folders/l5/lvvn04611nd_13s86nnfskfm0000gn/T/tmprfa2yhnu/2302.13971v1.pdf",
+    "source_id": null,
+    "start_date_effect": null,
+    "end_date_effect": null,
+    "date_publication": null,
+    "date_ingestion": "2025-06-29"
+  },
+  "file_metadata": {
+    "name": "2302.13971v1.pdf",
+    "size": "726566"
+  },
+  "content_hash": "7557a689a83f4eb85d5ad4c981cb89b1de69a939b11368ee49160c765c93240e",
+  "processing_timestamp": "2025-06-29T17:51:52.590667",
+  "processing_stats": {
+    "total_pages": 27,
+    "pages_with_tables": 4,
+    "pages_with_text": 27,
+    "total_table_count": 7,
+    "total_text_length": 81547
+  }
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "page_number": 1,
+    "text": "International Journal of Computer Sciences and Engineering\nOpen Access\nResearch Paper Vol.-7, Issue-10, Oct 2019 E-ISSN: 2347-2693\nEnergy Efficiency of Microprocessor\nHusain Unwala1*, Sairaj Shetye2, Abhishek Yadav3, Shakila Shaikh4, Shiburaj Pappu5\n1,2,3Dept. of Computer Science, Rizvi College of Engineering, Mumbai, India\n4,5Dept. of Computational Sciences, Rizvi College of Engineering, Mumbai, India\n*Corresponding Author: husunwala@gmail.com\nDOI: https://doi.org/10.26438/ijcse/v7i10.7476 | Available online at: www.ijcseonline.org\nAccepted: 09/Oct/2019, Published: 31/Oct/2019\nAbstract— In the microprocessor industry we see that energy efficiency is one-off the main issues that we are faced with. The\nmotivation for our paper is the increased applications which use embedded systems for communication and multimedia. In our\npaper you will see the changes in techniques that have made a considerable amount of development to make sure that the\nefficiency of the microprocessor consumes will be less but also not compromise with the performance (clock speed) that it\nprovides to the users. Internet connectivity has caused the devices to be in use all day long because of this the rate at which the\nmicroprocessor runs uses great amount of energy because of which energy efficiency has to be good. Ever since caches were\nintroduced they present the most attractive ways for power reduction. To implement coherent caches using MESI protocol we\nuse snoop filtering mechanism.\nKeywords—Energy, CMOS, Cache, Snoop Filtering.\nI. INTRODUCTION The figure shows the basic filter cache organization as\ncompared to the traditional memory organization. The main\nThe recent years have witnessed the emergence of multicore memory only consumes power for the bus capacitance and\nmicroprocessor chips (CMPs) as a practical and expedited the power consumed by the memory chip.\nway of exploiting the potentials of increasing number of\ntransistors within a chip to make it energy efficient, thus\nimprove performance, most microprocessors have one or two\nMain Memory 10-30 Main Memory\nlevels of on-chip caches. An energy-efficient design\nClocks\nmethodology has been developed for signal processing\napplications, resulting in a strategy to provide orders of\nL2 cache 4-10 L2 cache\nmagnitude of power reduction. For the chips, the cache (optional) Clocks (optional)\npower consumption is either the large or second largest\npower-consuming block. These trends will probably continue\nas embedded processors become more sophisticated and\nprovide higher performance. L1 cache 2-4 Clocks L1 cache\nA framework for an energy-efficient design methodology\n1 Clock\nmore suitable for a microprocessor’s two operating modes\nwill be presented: Filter\n1 Clock cache\n1. Maximum throughput\n2. User interactive mode\nUsing simple analytic models for delay and power in CMOS CPU CPU\ncircuits, metrics of energy efficiency for the above modes of\nConventional Filter cache\noperation will be developed. configuration configuration\nEnergy efficiency: Fig: 1. Power and Performance characteristics of traditional\nThroughput ≡ T = caches and the filter cache\n© 2019, IJCSE All Rights Reserved 74",
+    "tables": [
+      [
+        [
+          "",
+          "Open Access International Journal of Computer Sciences and Engineering"
+        ],
+        [
+          "Research Paper Vol.-7, Issue-10, Oct 2019 E-ISSN: 2347-2693",
+          ""
+        ]
+      ],
+      [
+        [
+          "",
+          "In the microprocessor industry we see that energy efficiency is one-off the main issues that we are faced with. The"
+        ],
+        [
+          "motivation for our paper is the increased applications which use embedded systems for communication and multimedia. In our",
+          ""
+        ],
+        [
+          "paper you will see the changes in techniques that have made a considerable amount of development to make sure that the",
+          ""
+        ],
+        [
+          "efficiency of the microprocessor consumes will be less but also not compromise with the performance (clock speed) that it",
+          ""
+        ],
+        [
+          "provides to the users. Internet connectivity has caused the devices to be in use all day long because of this the rate at which the",
+          ""
+        ],
+        [
+          "microprocessor runs uses great amount of energy because of which energy efficiency has to be good. Ever since caches were",
+          ""
+        ],
+        [
+          "introduced they present the most attractive ways for power reduction. To implement coherent caches using MESI protocol we",
+          ""
+        ],
+        [
+          "use snoop filtering mechanism.",
+          ""
+        ]
+      ]
+    ],
+    "text_stats": {
+      "word_count": 461,
+      "char_count": 3156,
+      "line_count": 51,
+      "table_count": 2
+    }
+  },
+  {
+    "page_number": 2,
+    "text": "International Journal of Computer Sciences and Engineering Vol.7(10), Oct 2019, E-ISSN: 2347-2693\nII. RELATED WORK capacitance buses. This clearly helps to save power although\nthe primary goal is improving performance since we believe\nIn [1] this paper we have examined that the CMOS circuits that low power architectures should be open to sacrificing\nhave both static and dynamic power dissipation. To reduce some performance for power savings. We see that by the\npower dissipation in CMOS microprocessor we need to proposed technique snoop related energy dissipation is\nqualify three important design principles for energy efficient decreased by 30 % on the average benchmarks studied.\nmicroprocessor design. A high-performance processor is\nusually an energy-efficient processor: reducing the clock IV. CONCLUSION AND FUTURE SCOPE\nfrequency does not increase the energy efficiency; and lastly,\nidle power dissipation limits the efficient of increasing This paper will conclude with the application of these\ndeliverable throughput. By identifying the major modes of metrics to quantify three important principles of energy-\ncomputation of these processors, a power analysis efficient microprocessor design. Also we have learnt that the\nmethodology is developed and it also allows the energy use of filtering snoops in a multicore microprocessors has\nefficiency of various CMOS architectures to be quantified. helped the industry of microprocessors to become more\nenergy efficient over the years. An organized analytical\nIn [2] this paper we explored that Caches clearly present one approach to the optimization of power in microprocessor\nof the most attractive targets for power reduction. Modern design, based on metrics that include the requirement of both\nmicroprocessors employ one or more levels of on-chip cache throughput and energy, as well as actual application\nin order to improve performance. The power decrease in the operation, allow the designer to quantify energy efficiency\ncache can be achieved by many ways: 1. semiconductor and provide insights into the design issues of energy efficient\nprocess improvements, 2. memory cell redesign, 3. voltage processor design. In-spite of the increasing commercial\nreduction and 4. Optimized cache structures. Caches often interest in the sophisticated embedded microprocessors, very\nuse a significant amount of power. In applications, such as little work has been conducted to improve the Energy Delay\nportable devices, as we have seen that low power is more performance of embedded processor systems through\nimportant than performance .It was propose to trade architecture. Thus we can say that energy efficiency should\nperformance by making the L1 cache unusually small for not come at the cost or performance.\npower consumption. Several techniques have been\ndiscovered which lead to an increased performance as well as REFERENCES\nreduced power consumption.\n[1] T. D. Burd and R. W. Brodersen, \"Energy efficient CMOS\nIn [3] this paper we studied that the In this paper we have microprocessor design,\" Proceedings of the Twenty-Eighth Annual\nHawaii International Conference on System Sciences, Wailea, HI,\nseen that recent years have witnessed the emergence of\nUSA, 1995, pp. 288-297 vol.1.\nmulticore microprocessor chips (CMPs) as a practical and\ndoi: 10.1109/HICSS.1995.375385\nexpedited way of exploiting the potentials of increasing [2]. Kin, Munish Gupta and W. H. Mangione-Smith, \"The filter cache:\nnumber of transistors within a chip. Snoop filter mechanism an energy efficient memory structure,\" Proceedings of 30th Annual\nis explained by a common mechanism to ensure cache International Symposium on Microarchitecture, Research Triangle\ncoherence is to issue snoop requests to all processors to Park, NC, USA, pp.184-193 doi: 10.1109/MICRO.1997.645809\n[3] A. Patel and K. Ghose, \"Energy-efficient MESI cache coherence\ncheck for the presence of cached data. As most of the snoop\nwith pro-active snoop filtering for multicore\nrequests result in misses in caches and waste a huge amount\nmicroprocessors,\" Proceeding of the 13th international symposium\nof power, snoop filters are widely used to filter out on Low power electronics and design (ISLPED '08), Bangalore,\nunnecessary snoop requests to reduce power consumption. 2008, pp. 247-252. doi: 10.1145/1393921.1393988\nThe energy saving's that results from the snoop filtering in [4] Tiwari, R. Sam and S. Shaikh, \"Analysis and prediction of churn\ncustomers for telecommunication industry,\" 2017 International\nthis scheme proposed is around 30% across the benchmarks\nConference on I-SMAC (IoT in Social, Mobile, Analytics and\nstudied in both a quad-core design in 65 nm and 8-core\nCloud) (I-SMAC), Palladam, 2017, pp. 218-222. doi: 10.1109/I-\ndesign in the 45 nm CMOS.\nSMAC.2017.8058343\n[5] S. Navadia, P. Yadav, J. Thomas and S. Shaikh, \"Weather\nIII. RESULTS AND DISCUSSION prediction: A novel approach for measuring and analyzing weather\ndata,\" 2017 International Conference on I-SMAC (IoT in Social,\nMobile, Analytics and Cloud) (I-SMAC), Palladam, 2017, pp. 414-\nWe have analysed that the portable electronic devices that\n417. doi: 10.1109/I-SMAC.2017.8058382\ncontain microprocessors, in which battery weight and size is\n[6] S. Shaikh, S. Rathi and P. Janrao, \"IRuSL: Image Recommendation\ncritical, but because of heat dissipation issues in larger Using Semantic Link,\" 2016 8th International Conference on\ndesktop and parallel machines we see that removing the Computational Intelligence and Communication Networks (CICN),\ngenerated heat and the drive towards “green” computers are Tehri, 2016, pp. 305-308. doi: 10.1109/CICN.2016.66\nmaking power reduction a priority. Improvements in the [7] S. Shaikh, S. Rathi and P. Janrao, \"Recommendation System in E-\nCommerce Websites: A Graph Based Approached,\" 2017 IEEE 7th\ncache organizations for higher performance commercial\nprocessors also serve to decrease the traffic on high\n© 2019, IJCSE All Rights Reserved 75",
+    "tables": [
+      [
+        [
+          "[7] S. Shaikh, S. Rathi and P. Janrao, \"Recommendation System in E-"
+        ],
+        [
+          "Commerce Websites: A Graph Based Approached,\" 2017 IEEE 7th"
+        ]
+      ]
+    ],
+    "text_stats": {
+      "word_count": 886,
+      "char_count": 5982,
+      "line_count": 72,
+      "table_count": 1
+    }
+  },
+  {
+    "page_number": 3,
+    "text": "International Journal of Computer Sciences and Engineering Vol.7(10), Oct 2019, E-ISSN: 2347-2693\nInternational Advance Computing Conference (IACC), Hyderabad,\n2017, pp. 931-934. doi: 10.1109/IACC.2017.0189\n[8] A. Fasiku, AyodejiIreti, B. Olawale, JimohBabatunde, C.\nAbiolaOluwatoyin B., \"Comparison of Intel Single-Core and Intel\nDual-Core Processor Performance\", International Journal of\nScientific Research in Computer Science and Engineering, Vol.1,\nIssue.1, pp.1-9, 2013\n[9] M. Sora, J. Talukdhar, S. Majumder, P.H Talukdhar, U.Sharmah,\n\"Word level detection of Galo and Adi language using acoustical\ncues\", International Journal of Scientific Research in Computer\nScience and Engineering, Vol.1, Issue.1, pp.10-13, 2013\n[10] Manish Mishra, Piyush Shukla, Rajeev Pandey, \"Assessment on\ndifferent tools used for Simulation of routing for Low power and\nlossy Networks(RPL)\", International Journal of Scientific Research\nin Network Security and Communication, Vol.7, Issue.4, pp.26-32,\n2019\nAuthors Profile\nHusain Unwala is pursuing Bachelor of\nEnginneiring in Computer Engineering from\nRizvi college of Engineering which is affialiated\nwith the Mumbai University.\nSairajShetye is pursuing Bachelor of\nEnginneiring in Computer Engineering from\nRizvi college of Engineering which is\naffialiated with the Mumbai University.\nAbhishek Yadav is pursuing Bachelor of\nEnginneiring in Computer Engineering from\nRizvi college of Engineering which is\naffialiated with the Mumbai University.\n© 2019, IJCSE All Rights Reserved 76",
+    "tables": [
+      [
+        [
+          "International Advance Computing Conference (IACC), Hyderabad,"
+        ],
+        [
+          "2017, pp. 931-934. doi: 10.1109/IACC.2017.0189"
+        ],
+        [
+          "[8] A. Fasiku, AyodejiIreti, B. Olawale, JimohBabatunde, C."
+        ],
+        [
+          "AbiolaOluwatoyin B., \"Comparison of Intel Single-Core and Intel"
+        ],
+        [
+          "Dual-Core Processor Performance\", International Journal of"
+        ],
+        [
+          "Scientific Research in Computer Science and Engineering, Vol.1,"
+        ],
+        [
+          "Issue.1, pp.1-9, 2013"
+        ],
+        [
+          "[9] M. Sora, J. Talukdhar, S. Majumder, P.H Talukdhar, U.Sharmah,"
+        ],
+        [
+          "\"Word level detection of Galo and Adi language using acoustical"
+        ],
+        [
+          "cues\", International Journal of Scientific Research in Computer"
+        ],
+        [
+          "Science and Engineering, Vol.1, Issue.1, pp.10-13, 2013"
+        ],
+        [
+          "[10] Manish Mishra, Piyush Shukla, Rajeev Pandey, \"Assessment on"
+        ],
+        [
+          "different tools used for Simulation of routing for Low power and"
+        ],
+        [
+          "lossy Networks(RPL)\", International Journal of Scientific Research"
+        ],
+        [
+          "in Network Security and Communication, Vol.7, Issue.4, pp.26-32,"
+        ],
+        [
+          "2019"
+        ]
+      ]
+    ],
+    "text_stats": {
+      "word_count": 201,
+      "char_count": 1519,
+      "line_count": 31,
+      "table_count": 1
+    }
+  }
+]
