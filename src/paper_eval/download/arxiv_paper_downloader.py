@@ -5,11 +5,13 @@ import logging
 
 from typing import Optional
 
+"""
+Utility for downloading arXiv papers for a given query (expected to be the paper title).
+"""
+
 
 def _search_arxiv_for_papers(paper_title: str) -> Optional[str]:
-    """
-    Search arXiv for the given query and return the PDF URL of the top result, if any.
-    """
+
     search = arxiv.Search(
         query=paper_title, max_results=1, sort_by=arxiv.SortCriterion.Relevance
     )
