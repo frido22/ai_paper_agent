@@ -21,17 +21,24 @@ app = Typer(add_help_option=True)
 
 
 def _process(pdf_path: Path) -> Dict[str, Any]:
-    sections = extract_sections(pdf_path)
-    results, conclusion, fig_caps = get_target_sections(sections)
-
+    # Load pages from data/processed/.../pages.json instead of extracting from PDF
+    pages_json_path = Path("data/processed/87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd/pages.json")
+    
+    with open(pages_json_path, 'r', encoding='utf-8') as f:
+        pages_data = json.load(f)
+    
+    print(f"Loaded {len(pages_data)} pages from {pages_json_path}")
+    
+    results, conclusion, fig_caps = get_target_sections(pages_data)
+    
     numeric_score, justification = score(results, conclusion)
-    support_map = supports(conclusion, fig_caps)
+    #support_map = supports(conclusion, fig_caps)
 
     return {
         "pdf": str(pdf_path),
         "score": numeric_score,
         "justification": justification,
-        "fig_support": support_map,
+        #"fig_support": support_map,
     }
 
 

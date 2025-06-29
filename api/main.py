@@ -10,7 +10,7 @@ import sys
 import tempfile
 import shutil
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 import json
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, BackgroundTasks
@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from src.graph_approach.argument_extractor import extract_argument_graph
 from src.ingestion.ingest import run_pipeline
 from src.ingestion.core.file_object import FileObject
-
+from src.paper_eval.pipeline.run_pipeline import _process
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -59,8 +59,14 @@ def validate_pdf_file(file: UploadFile) -> None:
     if file.size and file.size > 50 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="File size must be less than 50MB")
 
+def process_pdf_to_json(pdf_path: Path) -> Dict[str, Any]:
+    """
+    Process a PDF file through ingestion and return the results as a JSON object.
+    """
+    file_objects = run_pipeline(force_reprocess=True, file_path=pdf_path)
+    return file_objects[0].to_json()
 
-def process_pdf_to_graph(pdf_path: Path) -> Dict[str, Any]:
+def process_pdf_to_graph(pages: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Process a PDF file through ingestion and graph extraction.
     
@@ -71,16 +77,6 @@ def process_pdf_to_graph(pdf_path: Path) -> Dict[str, Any]:
         Dictionary containing the argument graph and metadata
     """
     try:
-        # Run ingestion pipeline
-        file_objects = run_pipeline(force_reprocess=True, file_path=pdf_path)
-        
-        if not file_objects:
-            raise Exception("No file objects returned from ingestion pipeline")
-        
-        file_obj = file_objects[0]
-        
-        # Pass PageData objects directly to extract_argument_graph
-        pages = file_obj.pages
         
         # Extract argument graph
         graph_result = extract_argument_graph(pages)
@@ -123,7 +119,7 @@ def process_pdf_to_graph(pdf_path: Path) -> Dict[str, Any]:
         }
 
 
-@app.post("/extract-argument-graph/")
+@app.post("/extract-results/")
 async def extract_argument_graph_endpoint(file: UploadFile = File(...)) -> JSONResponse:
     """
     Extract argument graph from uploaded PDF file.
@@ -146,13 +142,17 @@ async def extract_argument_graph_endpoint(file: UploadFile = File(...)) -> JSONR
         with open(pdf_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
+        json_result = process_pdf_to_json(pdf_path)
+        print(json_result)
         # Process the PDF
-        result = process_pdf_to_graph(pdf_path)
+        graph_result = process_pdf_to_graph(json_result)
         
-        if not result["success"]:
-            raise HTTPException(status_code=500, detail=result["error"])
+        if not graph_result["success"]:
+            raise HTTPException(status_code=500, detail=graph_result["error"])
         
-        return JSONResponse(content=result, status_code=200)
+        score_result = _process(json_result)
+
+        return JSONResponse(content=graph_result, status_code=200)
         
     except HTTPException:
         # Re-raise HTTP exceptions
