@@ -12,7 +12,7 @@ load_dotenv()
 
 __all__ = ["score"]
 
-_OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo-0125")
+_OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
 
 _PROMPT_TEMPLATE = (
     """You are an expert reviewer for scientific articles. On a scale from 0 to 100 "
