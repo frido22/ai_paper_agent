@@ -30,6 +30,18 @@ ai-paper-evaluator/
 
 Each source file is < 400 LOC for readability.
 
+## Module API contracts
+
+| Module | Public call | Input type(s) | Output |
+| ------ | ----------- | ------------- | ------ |
+| extractor | `extract_sections(pdf_path)` | `pdf_path`: `str` or `Path` to a local PDF file | `dict[str, str]` mapping section name → raw text |
+| parser | `get_target_sections(sections)` | `sections`: dict from extractor | `(results:str, conclusion:str, fig_caps:list[str])` |
+| evaluator | `score(results, conclusion)` | two strings from parser | `(score:int, justification:str)` |
+| figmatcher | `supports(conclusion, figure_captions)` | `conclusion`: str sentence(s); `figure_captions`: list[str] | `dict[str,bool]` mapping each claim → support flag |
+| pipeline | `_process(pdf_path)` / Typer CLI | `pdf_path`: Path | dict with keys `score`, `justification`, `fig_support`, `pdf` |
+
+Use these simple, pure-function contracts to keep modules decoupled.
+
 ## Environment variables
 See `.env.example` for the exact names.  We **never** commit secrets.
 
