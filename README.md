@@ -45,5 +45,8 @@ Use these simple, pure-function contracts to keep modules decoupled.
 ## Environment variables
 See `.env.example` for the exact names.  We **never** commit secrets.
 
+
+Front end Github Repository: https://github.com/deepanshgandhi/paper-insight-score
+
 ---
 © 2025 Paper-Eval Team – MIT License
