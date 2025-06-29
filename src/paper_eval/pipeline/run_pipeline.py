@@ -20,9 +20,8 @@ from paper_eval.figmatcher.figure_matcher import supports
 app = Typer(add_help_option=True)
 
 
-def _process(pdf_path: Path) -> Dict[str, Any]:
+def _process(pages_json_path: Path) -> Dict[str, Any]:
     # Load pages from data/processed/.../pages.json instead of extracting from PDF
-    pages_json_path = Path("data/processed/87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd/pages.json")
     
     with open(pages_json_path, 'r', encoding='utf-8') as f:
         pages_data = json.load(f)
@@ -35,7 +34,7 @@ def _process(pdf_path: Path) -> Dict[str, Any]:
     #support_map = supports(conclusion, fig_caps)
 
     return {
-        "pdf": str(pdf_path),
+        "pdf": str(pages_json_path),
         "score": numeric_score,
         "justification": justification,
         #"fig_support": support_map,

@@ -1,180 +1,130 @@
 {
   "success": true,
   "document_info": {
-    "filename": "2009.07810v2.pdf",
-    "total_pages": 23,
-    "content_hash": "87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd"
+    "total_pages": 23
   },
   "graph_statistics": {
-    "total_components": 23,
+    "total_components": 10,
     "total_relationships": 20,
     "components_by_type": {
-      "Method": 5,
-      "Background": 3,
-      "Claim": 4,
-      "Counterclaim": 2,
-      "Result": 3,
       "Evidence": 3,
-      "Conclusion": 2,
-      "Limitation": 1
+      "Claim": 2,
+      "Result": 1,
+      "Background": 1,
+      "Counterclaim": 1,
+      "Conclusion": 1,
+      "Method": 1
     },
     "relationships_by_type": {
-      "motivates": 4,
-      "elaborates": 4,
+      "supported_by": 3,
       "demonstrates": 4,
-      "supported_by": 2,
-      "leads_to": 4,
-      "contradicted_by": 1,
-      "addresses": 1
+      "elaborates": 6,
+      "motivates": 2,
+      "addresses": 1,
+      "compares_to": 1,
+      "builds_on": 1,
+      "leads_to": 2
     }
   },
   "argument_graph": {
     "nodes": [
       {
-        "id": "P1-M4",
-        "type": "Method",
-        "text": "Our contributions include: Foundations - We survey evaluation datasets in encyclopedic knowledge graph completion to motivate a new benchmark (§2 and Appendix A). Data - We introduce CODEX, a benchmark consisting of three knowledge graphs varying in size and structure, entity types, multilingual labels and descriptions, and—unique to CODEX—manually verified hard negative triples (§ 3). Benchmarking - We conduct large-scale model selection and benchmarking experiments, reporting baseline link prediction and triple classification results on CODEX for five widely used embedding models from different architectural classes (§5).",
-        "page": 1
+        "id": "P8-E9",
+        "type": "Evidence",
+        "text": "The disparity in improvement is due to two relation patterns prevalent in FB15K-237: Skewed relations FB15K-237 contains many relations that are skewed toward a single head or tail entity. For example, our baseline achieves perfect performance over all (h,r,?) queries for the /common/topic/webpage./common/webpage/category relation because this relation has only one unique tail entity. Another example of a highly skewed relation in FB15K-237 is /people/person/gender, for which 78.41% of tails are the entity male. In fact, 11 relations in FB15K-237 have only one unique tail entity, accounting for 3.22% of all tail queries in FB15K-237. Overall, 15.98% of test triples in FB15K-237 contain relations that are skewed 50% or more toward a single head or tail entity, whereas only 1.26% of test triples in CODEX-M contain such skewed relations. Fixed-set relations Around 12.7% of test queries in FB15K-237 contain relation types that connect entities to fixed sets of values. As an example, each head entity that participates in the FB15K-237 relation /travel/travel_destination/climate./travel/travel_destination_monthly_climate/month is connected to the same 12 tails (months of the year) throughout train, validation, and test. This makes prediction trivial with our baseline: By filtering out the tail entities already seen in train, only a few (or even one) candidate tail(s) are left in test, and the answer is guaranteed to be within these candidates. These relations only occur in FB15K-237 because of the way the dataset was constructed from Freebase. Specifically, Freebase used a special type of entity called Compound Value Type (CVT) as an intermediary node connecting n-ary relations. Binary relations were created by traversing through CVTs, yielding some relations that connect entities to fixed sets of values.",
+        "page": 8
       },
       {
-        "id": "P1-B6",
-        "type": "Background",
-        "text": "As progress in artificial intelligence depends heavily on data, a relevant and high-quality benchmark is imperative to evaluating and advancing the state of the art in KGC. However, the field has largely remained static in this regard over the past decade. Outdated subsets of Freebase (Bollacker et al., 2008) are most commonly used for evaluation, even though Freebase had known quality issues (Tanon et al., 2016) and was eventually deprecated in favor of the more recent Wikidata knowledge base (Vrandecic´ and Krötzsch, 2014).",
-        "page": 1
+        "id": "P2-E7",
+        "type": "Evidence",
+        "text": "Table 1: Qualitative comparison of CODEX datasets to existing Freebase-based KGC datasets (§2.1). Freebase variants (FB15K, FB15K-237) CODEX datasets Scope (domains) Multi-domain, with a strong focus on awards, entertainment, and sports (6.1 and Appendix E) Multi-domain, with focuses on writing, entertainment, music, politics, journalism, academics, and science (6.1 and Appendix E) Scope (auxiliary data) Various decentralized versions of FB15K with, e.g., entity types, sampled negatives, and more (Table 8) Centralized repository of three datasets with entity types, multilingual text, and manually annotated hard negatives (§3) Level of difficulty FB15K has severe train/test leakage from inverse relations (Toutanova and Chen, 2015); while removal of inverse relations makes FB15K-237 harder than FB15K, FB15K-237 still has a high proportion of easy-to-predict relational patterns (§6.2) Inverse relations removed from all datasets to avoid train/test leakage (§3.2); manually annotated hard negatives for the task of triple classification (§3.4); few trivial patterns for the task of link prediction (§6.2).",
+        "page": 2
       },
       {
         "id": "P1-C1",
         "type": "Claim",
-        "text": "We present CODEX, a set of knowledge graph COmpletion Datasets EXtracted from Wikidata and Wikipedia that improve upon existing knowledge graph completion benchmarks in scope and level of difficulty. In terms of scope, CODEX comprises three knowledge graphs varying in size and structure, multilingual descriptions of entities and relations, and tens of thousands of hard negative triples that are plausible but verified to be false. To characterize CODEX, we contribute thorough empirical analyses and benchmarking experiments.",
+        "text": "We present CODEX, a set of knowledge graph COmpletion Datasets EXtracted from Wikidata and Wikipedia that improve upon existing knowledge graph completion benchmarks in scope and level of difficulty. In terms of scope, CODEX comprises three knowledge graphs varying in size and structure, multilingual descriptions of entities and relations, and tens of thousands of hard negative triples that are plausible but verified to be false. To characterize CODEX, we contribute thorough empirical analyses and benchmarking experiments. First, we analyze each CODEX dataset in terms of logical relation patterns. Next, we report baseline link prediction and triple classification results on CODEX for five extensively tuned embedding models. Finally, we differentiate CODEX from the popular FB15K-237 knowledge graph completion dataset by showing that CODEX covers more diverse and interpretable content, and is a more difficult link prediction benchmark.",
         "page": 1
       },
       {
-        "id": "P3-C14",
-        "type": "Counterclaim",
-        "text": "While random negative sampling is beneficial and even necessary in the case where a large number of negatives is needed (i.e., training), it is not necessarily useful for evaluation. For example, in the task of triple classification, the goal is to discriminate between positive (true) and negative (false) triples. As we show in §5.5, triple classification over randomly generated negatives is trivially easy for state-of-the-art models because random negatives are generally not meaningful or plausible.",
-        "page": 3
-      },
-      {
-        "id": "P6-R20",
+        "id": "P6-R5",
         "type": "Result",
-        "text": "Our experiments show that on negatives generated randomly, performance scores are nearly identical at almost 100% accuracy. Even with a negative sampling strategy “smarter” than uniform random, all models perform well. However, performance degenerates considerably on our hard negatives, around 8 to 11 percentage points from relative frequency-based sampling and 13 to 19 percentage points from uniformly random sampling.",
+        "text": "Triple classification on randomly generated negatives is a nearly-solved task. On negatives generated uniformly at random, performance scores are nearly identical at almost 100% accuracy. Even with a negative sampling strategy “smarter” than uniform random, all models perform well. Hard negatives Classification performance degenerates considerably on our hard negatives, around 8 to 11 percentage points from relative frequency-based sampling and 13 to 19 percentage points from uniformly random sampling. These results indicate that triple classification is indeed a distinct task that requires different architectures and, in many cases, different training strategies.",
         "page": 6
-      },
-      {
-        "id": "P4-M17",
-        "type": "Method",
-        "text": "Symmetric relations are relations r for which (h, r, t) ∈ G implies (t, r, h) ∈ G. For each relation, we compute the number of its (head, tail) pairs that overlap with its (tail, head) pairs, divided by the total number of pairs, and take those with 50% overlap or higher as symmetric. CODEX datasets have five such relations: diplomatic relation, shares border with, sibling, spouse, and unmarried partner.",
-        "page": 4
-      },
-      {
-        "id": "P4-M15",
-        "type": "Method",
-        "text": "To generate hard negatives, we used each pre-trained embedding model from § 5.2 to predict tail entities of triples in CODEX. For each model, we took as candidate negatives the triples (h, r, tˆ) for which (i) the type of the predicted tail entity tˆ matched the type of the true tail entity t; (ii) tˆ was ranked in the top-10 predictions by that model; and (iii) (h, r, tˆ) was not observed in G.",
-        "page": 4
       },
       {
         "id": "P1-B2",
         "type": "Background",
-        "text": "Knowledge graphs are multi-relational graphs that express facts about the world by connecting entities (people, places, things, concepts) via different types of relationships. The field of automatic knowledge graph completion (KGC), which is motivated by the fact that knowledge graphs are usually incomplete, is an active research direction spanning several subfields of artificial intelligence.",
+        "text": "Knowledge graphs are multi-relational graphs that express facts about the world by connecting entities (people, places, things, concepts) via different types of relationships. The field of automatic knowledge graph completion (KGC), which is motivated by the fact that knowledge graphs are usually incomplete, is an active research direction spanning several subfields of artificial intelligence. As progress in artificial intelligence depends heavily on data, a relevant and high-quality benchmark is imperative to evaluating and advancing the state of the art in KGC.",
         "page": 1
-      },
-      {
-        "id": "P2-E5",
-        "type": "Evidence",
-        "text": "Table 1: Qualitative comparison of CODEX datasets to existing Freebase-based KGC datasets (§2.1). Freebase variants (FB15K, FB15K-237) CODEX datasets Scope (domains) Multi-domain, with a strong focus on awards, entertainment, and sports (§6.1 and Appendix E) Multi-domain, with focuses on writing, entertainment, music, politics, journalism, academics, and science (§6.1 and Appendix E).",
-        "page": 2
       },
       {
         "id": "P1-C3",
-        "type": "Claim",
-        "text": "To address the need for a solid benchmark in KGC, we present CODEX, a set of knowledge graph COmpletion Datasets EXtracted from Wikidata and its sister project Wikipedia. Inasmuch as Wikidata is considered the successor of Freebase, CODEX improves upon existing Freebase-based KGC benchmarks in terms of scope and level of difficulty (Table 1).",
-        "page": 1
-      },
-      {
-        "id": "P3-E11",
-        "type": "Evidence",
-        "text": "Table 2: CODEX datasets. (+): Positive (true) triples. (-): Verified negative (false) triples (§ 3.4). We compute multilingual coverage over all labels, descriptions, and entity Wikipedia extracts successfully retrieved for the respective dataset in Arabic (ar), German (de), English (en), Spanish (es), Russian (ru), and Chinese (zh).",
-        "page": 3
-      },
-      {
-        "id": "P1-C18",
-        "type": "Claim",
-        "text": "We survey evaluation datasets in encyclopedic knowledge graph completion to motivate a new benchmark. Data - We introduce CODEX, a benchmark consisting of three knowledge graphs varying in size and structure, entity types, multilingual labels and descriptions, and—unique to CODEX—manually verified hard negative triples.",
-        "page": 1
-      },
-      {
-        "id": "P3-B10",
-        "type": "Background",
-        "text": "Knowledge graphs are unique in that they only contain positive statements, meaning that triples not observed in a given knowledge graph are not necessarily false, but merely unseen; this is called the Open World Assumption. However, most machine learning tasks on knowledge graphs require negatives in some capacity.",
-        "page": 3
-      },
-      {
-        "id": "P1-C7",
-        "type": "Claim",
-        "text": "CODEX improves upon existing benchmarks in scope and level of difficulty. CODEX datasets cover more diverse and interpretable content, and are a more challenging link prediction benchmark. We show that CODEX covers more diverse and interpretable content, and is a more challenging link prediction benchmark.",
-        "page": 1
-      },
-      {
-        "id": "P1-C19",
-        "type": "Conclusion",
-        "text": "Comparative analysis Finally, to demonstrate the unique value of CODEX, we differentiate CODEX from the popular FB15K-237 knowledge graph completion dataset by showing that CODEX covers more diverse and interpretable content, and is a more difficult link prediction benchmark.",
-        "page": 1
-      },
-      {
-        "id": "P3-M12",
-        "type": "Method",
-        "text": "To create smaller data snapshots, we filtered the initial 1.15 million triples to k-cores, which are maximal subgraphs G' of a given graph G such that every node in G' has a degree of at least k. We constructed three CODEX datasets: CODEX-S, CODEX-M, and CODEX-L.",
-        "page": 3
-      },
-      {
-        "id": "P6-R23",
-        "type": "Result",
-        "text": "Effect of hyperparameters As shown by Figure 1, hyperparameters have a strong impact on link prediction performance: Validation MRR for all models varies by over 30 percentage points depending on the training strategy and input configuration.",
-        "page": 6
-      },
-      {
-        "id": "P1-M13",
-        "type": "Method",
-        "text": "Benchmarking We conduct large-scale model selection and benchmarking experiments, reporting baseline link prediction and triple classification results on CODEX for five widely used embedding models from different architectural classes (§5).",
-        "page": 1
-      },
-      {
-        "id": "P1-C8",
-        "type": "Conclusion",
-        "text": "Finally, we differentiate CODEX from the popular FB15K-237 knowledge graph completion dataset by showing that CODEX covers more diverse and interpretable content, and is a more difficult link prediction benchmark (Table 1).",
-        "page": 1
-      },
-      {
-        "id": "P6-R21",
-        "type": "Result",
-        "text": "Overall, we find that the choice of loss function in particular significantly impacts model performance. Each model consistently achieved its respective peak performance with cross-entropy (CE) loss.",
-        "page": 6
-      },
-      {
-        "id": "P4-L16",
-        "type": "Limitation",
-        "text": "A potential limitation is that CODEX datasets have only been tested with certain types of embedding models, which may not encompass all possible applications or reveal all potential weaknesses.",
-        "page": 4
-      },
-      {
-        "id": "P2-E22",
-        "type": "Evidence",
-        "text": "The table offers evidence comparing the scope of CODEX and Freebase datasets, detailing domain coverage that supports the claim of CODEX offering more diverse content.",
-        "page": 2
-      },
-      {
-        "id": "P1-C9",
         "type": "Counterclaim",
-        "text": "Later in this paper (§6.2), we will show that a relatively large proportion of relations in FB15K-237 can be covered by a trivial frequency rule.",
+        "text": "Later in this paper (§6.2), we will show that a relatively large proportion of relations in FB15K-237 can be covered by a trivial frequency rule. To address the need for a solid benchmark in KGC, we present CODEX, a set of knowledge graph Completion Datasets Extracted from Wikidata and its sister project Wikipedia. Inasmuch as Wikidata is considered the successor of Freebase, CODEX improves upon existing Freebase-based KGC benchmarks in terms of scope and level of difficulty (Table 1).",
         "page": 1
+      },
+      {
+        "id": "P7-C8",
+        "type": "Claim",
+        "text": "Finally, we conduct a comparative analysis between CODEX-M and FB15K-237 (§ 2.1) to demonstrate the unique value of CODEX. We choose FB15K-237 because it is the most popular encyclopedic KGC benchmark after FB15K, which was already shown to be an easy dataset by Toutanova and Chen (2015). We choose CODEX-M because it is the closest in size to FB15K-237. Our analysis shows that CODEX-M covers more diverse and interpretable content, and is a more challenging link prediction benchmark.",
+        "page": 7
+      },
+      {
+        "id": "P6-C10",
+        "type": "Conclusion",
+        "text": "Overall, we find that the choice of loss function significantly impacts model performance. Each model consistently achieved its respective peak performance with cross-entropy (CE) loss, a finding which is corroborated by several other KGC comparison papers (Kadlec et al., 2017; Ruffinelli et al., 2020; Jain et al., 2020). As far as negative sampling techniques, we do not find that a single strategy is dominant, suggesting that the choice of loss function is more important.",
+        "page": 6
+      },
+      {
+        "id": "P5-E4",
+        "type": "Evidence",
+        "text": "Our experiments show that the choice of loss function in particular significantly impacts model performance. Each model consistently achieved its respective peak performance with cross-entropy (CE) loss, a finding which is corroborated by several other KGC comparison papers. As far as negative sampling techniques, we do not find that a single strategy is dominant, suggesting that the choice of loss function is more important.",
+        "page": 5
+      },
+      {
+        "id": "P5-M6",
+        "type": "Method",
+        "text": "CODEX can be used to evaluate any type of KGC method. However, we focus on embeddings in this section due to their widespread usage in modern NLP.",
+        "page": 5
       }
     ],
     "edges": [
       {
-        "source": "P1-B6",
+        "source": "P1-C1",
+        "target": "P2-E7",
+        "relation": "supported_by",
+        "page": 2
+      },
+      {
+        "source": "P1-C1",
+        "target": "P7-C8",
+        "relation": "demonstrates",
+        "page": 7
+      },
+      {
+        "source": "P1-C3",
+        "target": "P8-E9",
+        "relation": "elaborates",
+        "page": 8
+      },
+      {
+        "source": "P1-C1",
+        "target": "P6-R5",
+        "relation": "demonstrates",
+        "page": 6
+      },
+      {
+        "source": "P5-E4",
+        "target": "P6-C10",
+        "relation": "supported_by",
+        "page": 6
+      },
+      {
+        "source": "P5-M6",
         "target": "P1-C1",
-        "relation": "motivates",
-        "page": 1
+        "relation": "elaborates",
+        "page": 5
       },
       {
         "source": "P1-B2",
@@ -183,112 +133,82 @@
         "page": 1
       },
       {
-        "source": "P1-M4",
-        "target": "P1-C1",
-        "relation": "elaborates",
-        "page": 1
-      },
-      {
-        "source": "P1-C3",
-        "target": "P1-C7",
-        "relation": "demonstrates",
-        "page": 1
-      },
-      {
-        "source": "P1-C3",
-        "target": "P3-M12",
-        "relation": "elaborates",
-        "page": 3
-      },
-      {
-        "source": "P2-E5",
-        "target": "P1-C7",
-        "relation": "supported_by",
-        "page": 2
-      },
-      {
-        "source": "P3-B10",
-        "target": "P3-C14",
+        "source": "P1-B2",
+        "target": "P1-C3",
         "relation": "motivates",
-        "page": 3
+        "page": 1
       },
       {
-        "source": "P3-C14",
-        "target": "P6-R20",
-        "relation": "demonstrates",
-        "page": 6
-      },
-      {
-        "source": "P3-M12",
-        "target": "P1-C1",
+        "source": "P8-E9",
+        "target": "P7-C8",
         "relation": "elaborates",
-        "page": 3
-      },
-      {
-        "source": "P1-M13",
-        "target": "P6-R20",
-        "relation": "leads_to",
-        "page": 6
-      },
-      {
-        "source": "P4-M15",
-        "target": "P6-R20",
-        "relation": "leads_to",
-        "page": 6
-      },
-      {
-        "source": "P1-C9",
-        "target": "P1-C7",
-        "relation": "contradicted_by",
-        "page": 1
-      },
-      {
-        "source": "P1-C19",
-        "target": "P1-C7",
-        "relation": "demonstrates",
-        "page": 1
+        "page": 8
       },
       {
         "source": "P1-C1",
-        "target": "P6-R23",
-        "relation": "leads_to",
-        "page": 6
-      },
-      {
-        "source": "P4-L16",
-        "target": "P1-C19",
+        "target": "P1-B2",
         "relation": "addresses",
-        "page": 4
+        "page": 1
       },
       {
-        "source": "P1-M4",
-        "target": "P6-R21",
-        "relation": "leads_to",
-        "page": 6
+        "source": "P8-E9",
+        "target": "P5-M6",
+        "relation": "demonstrates",
+        "page": 8
       },
       {
-        "source": "P1-C18",
-        "target": "P2-E22",
+        "source": "P6-R5",
+        "target": "P7-C8",
+        "relation": "elaborates",
+        "page": 7
+      },
+      {
+        "source": "P7-C8",
+        "target": "P2-E7",
+        "relation": "compares_to",
+        "page": 7
+      },
+      {
+        "source": "P5-E4",
+        "target": "P5-M6",
+        "relation": "builds_on",
+        "page": 5
+      },
+      {
+        "source": "P2-E7",
+        "target": "P1-C3",
         "relation": "supported_by",
         "page": 2
       },
       {
-        "source": "P3-M12",
-        "target": "P1-C7",
-        "relation": "demonstrates",
-        "page": 3
+        "source": "P6-R5",
+        "target": "P8-E9",
+        "relation": "elaborates",
+        "page": 8
       },
       {
-        "source": "P4-M17",
-        "target": "P6-R21",
+        "source": "P7-C8",
+        "target": "P1-C1",
+        "relation": "demonstrates",
+        "page": 7
+      },
+      {
+        "source": "P8-E9",
+        "target": "P6-C10",
         "relation": "elaborates",
+        "page": 8
+      },
+      {
+        "source": "P5-M6",
+        "target": "P6-R5",
+        "relation": "leads_to",
         "page": 6
       },
       {
-        "source": "P3-B10",
-        "target": "P3-M12",
-        "relation": "motivates",
-        "page": 3
+        "source": "P1-C1",
+        "target": "P6-C10",
+        "relation": "leads_to",
+        "page": 6
       }
     ]
   }

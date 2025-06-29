@@ -64,19 +64,21 @@ def process_pdf_to_json(pdf_path: Path) -> Dict[str, Any]:
     Process a PDF file through ingestion and return the results as a JSON object.
     """
     file_objects = run_pipeline(force_reprocess=True, file_path=pdf_path)
-    return file_objects[0].to_json()
+    return file_objects[0]
 
-def process_pdf_to_graph(pages: List[Dict[str, Any]]) -> Dict[str, Any]:
+def process_pdf_to_graph(file_obj: FileObject) -> Dict[str, Any]:
     """
     Process a PDF file through ingestion and graph extraction.
     
     Args:
-        pdf_path: Path to the PDF file
+        file_obj: FileObject containing the processed PDF data
         
     Returns:
         Dictionary containing the argument graph and metadata
     """
     try:
+        # Extract pages from FileObject
+        pages = file_obj.pages  # Pass PageData objects directly, not as dictionaries
         
         # Extract argument graph
         graph_result = extract_argument_graph(pages)
@@ -84,10 +86,8 @@ def process_pdf_to_graph(pages: List[Dict[str, Any]]) -> Dict[str, Any]:
         # Prepare response
         response = {
             "success": True,
-            "document_info": {
-                "filename": file_obj.document_name,
+            "document_info": {     
                 "total_pages": len(pages),
-                "content_hash": file_obj.content_hash,
             },
             "graph_statistics": {
                 "total_components": len(graph_result["nodes"]),
@@ -142,17 +142,26 @@ async def extract_argument_graph_endpoint(file: UploadFile = File(...)) -> JSONR
         with open(pdf_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        json_result = process_pdf_to_json(pdf_path)
-        print(json_result)
+        file_obj = process_pdf_to_json(pdf_path)
+        print(file_obj)
         # Process the PDF
-        graph_result = process_pdf_to_graph(json_result)
+        # Construct path to processed pages.json file
+        pages_json_path = Path("data/processed") / file_obj.content_hash / "pages.json"
+        score_result = _process(pages_json_path)
+        print(score_result)
+        graph_result = process_pdf_to_graph(file_obj)
         
         if not graph_result["success"]:
             raise HTTPException(status_code=500, detail=graph_result["error"])
         
-        score_result = _process(json_result)
+        # Include score and justification in the response
+        response = graph_result.copy()
+        response["evaluation"] = {
+            "score": score_result.get("score"),
+            "justification": score_result.get("justification")
+        }
 
-        return JSONResponse(content=graph_result, status_code=200)
+        return JSONResponse(content=response, status_code=200)
         
     except HTTPException:
         # Re-raise HTTP exceptions

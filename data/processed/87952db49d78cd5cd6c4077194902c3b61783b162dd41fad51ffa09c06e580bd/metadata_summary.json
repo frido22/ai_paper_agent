@@ -1,7 +1,7 @@
 {
   "document_info": {
     "document_name": "2009.07810v2.pdf",
-    "document_path": "data/2009.07810v2.pdf",
+    "document_path": "/var/folders/9h/89kq7ty92m37h7lfypyx8jcc0000gn/T/tmpt_kub31h/2009.07810v2.pdf",
     "source_id": null,
     "start_date_effect": null,
     "end_date_effect": null,
@@ -13,7 +13,7 @@
     "size": "524577"
   },
   "content_hash": "87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd",
-  "processing_timestamp": "2025-06-29T16:22:28.051357",
+  "processing_timestamp": "2025-06-29T16:47:32.766942",
   "processing_stats": {
     "total_pages": 23,
     "pages_with_tables": 1,

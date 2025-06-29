@@ -47,7 +47,7 @@ def upload_pdf_and_extract_graph(pdf_path: str, base_url: str = "http://localhos
     try:
         with open(pdf_path, 'rb') as f:
             files = {'file': (Path(pdf_path).name, f, 'application/pdf')}
-            response = requests.post(f"{base_url}/extract-argument-graph/", files=files)
+            response = requests.post(f"{base_url}/extract-results/", files=files)
         
         if response.status_code == 200:
             result = response.json()
