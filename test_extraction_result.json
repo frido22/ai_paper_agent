@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "id": "P1-C1",
+      "type": "Claim",
+      "text": "To address the need for a solid benchmark in KGC, we present CODEX, a set of knowledge graph COmpletion Datasets EXtracted from Wikidata and its sister project Wikipedia. Inasmuch as Wikidata is considered the successor of Freebase, CODEX improves upon existing Freebase-based KGC benchmarks in terms of scope and level of difficulty. Our contributions include: Foundations We survey evaluation datasets in encyclopedic knowledge graph completion to motivate a new benchmark.",
+      "page": 1
+    },
+    {
+      "id": "P1-B6",
+      "type": "Background",
+      "text": "As progress in artificial intelligence depends heavily on data, a relevant and high-quality benchmark is imperative to evaluating and advancing the state of the art in KGC. However, the field has largely remained static in this regard over the past decade.",
+      "page": 1
+    },
+    {
+      "id": "P1-C4",
+      "type": "Claim",
+      "text": "To demonstrate the unique value of CODEX, we differentiate CODEX from the popular FB15K-237 knowledge graph completion dataset by showing that CODEX covers more diverse and interpretable content, and is a more difficult link prediction benchmark.",
+      "page": 1
+    },
+    {
+      "id": "P2-B10",
+      "type": "Background",
+      "text": "We begin by surveying existing KGC benchmarks. Table 8 in Appendix A provides an overview of the evaluation datasets and tasks on a per-paper basis across the artificial intelligence, machine learning, and natural language processing communities.",
+      "page": 2
+    },
+    {
+      "id": "P1-E5",
+      "type": "Evidence",
+      "text": "FB15K was shown to have severe train/test leakage from inverse relations; while removal of inverse relations makes FB15K-237 harder than FB15K, FB15K-237 still has a high proportion of trivial patterns for the task of link prediction.",
+      "page": 1
+    },
+    {
+      "id": "P1-M7",
+      "type": "Method",
+      "text": "We conduct large-scale model selection and benchmarking experiments, reporting baseline link prediction and triple classification results on CODEX for five widely used embedding models from different architectural classes.",
+      "page": 1
+    },
+    {
+      "id": "P1-E2",
+      "type": "Evidence",
+      "text": "CODEX comprises three knowledge graphs varying in size and structure, multilingual descriptions of entities and relations, and tens of thousands of hard negative triples that are plausible but verified to be false.",
+      "page": 1
+    },
+    {
+      "id": "P1-M3",
+      "type": "Method",
+      "text": "We analyze each CODEX dataset in terms of logical relation patterns. Next, we report baseline link prediction and triple classification results on CODEX for five extensively tuned graph embedding models.",
+      "page": 1
+    },
+    {
+      "id": "P2-L9",
+      "type": "Limitation",
+      "text": "NELL-995 is not a meaningful dataset for KGC evaluation, as many of the triples are nonsensical or overly generic, suggesting that it fails to provide a robust evaluation framework.",
+      "page": 2
+    },
+    {
+      "id": "P1-C8",
+      "type": "Conclusion",
+      "text": "Our results suggest that CODEX provides a more challenging link prediction benchmark compared to existing datasets, as it covers more diverse and interpretable content.",
+      "page": 1
+    },
+    {
+      "id": "P13-E1",
+      "type": "Evidence",
+      "text": "Examples of grammatically incorrect triples are those whose entity correlation types do not make sense, for example: (United States of America, continent, science fiction writer), (Mohandas Karamchand Gandhi, medical condition, British Raj), (Canada, foundational text, Vietnamese cuisine). Examples of grammatically correct but factually false triples include: (United States of America, continent, Europe), (Mohandas Karamchand Gandhi, country of citizenship, Argentina), (Canada, foundational text, Harry Potter and the Goblet of Fire), (Alexander Pushkin, influenced by, Leo Tolstoy)—Pushkin died only a few years after Tolstoy was born, so this sentence is unlikely.",
+      "page": 13
+    },
+    {
+      "id": "P13-B2",
+      "type": "Background",
+      "text": "The main evaluation benchmarks are FB15K (Bordes et al., 2013), WN18 (Bordes et al., 2013), FB15K-237 (Toutanova and Chen, 2015), WN18RR (Dettmers et al., 2018), FB13 (Socher et al., 2013), WN11 (Socher et al., 2013), NELL-995 (Xiong et al., 2017), YAGO3-10 (Dettmers et al., 2018), Countries (Bouchard et al., 2015), UMLS (McCray, 2003), Kinship (Kemp et al., 2006), Families (Hinton, 1986), and other versions of NELL (Mitchell et al., 2018).",
+      "page": 13
+    },
+    {
+      "id": "P13-B3",
+      "type": "Background",
+      "text": "Table 8 provides an overview of knowledge graph embedding papers with respect to datasets and evaluation tasks. In our review, we only consider papers published between 2014 and 2020 in the main proceedings of conferences where KGC embedding papers are most likely to appear: Artificial Intelligence (AAAI, IJCAI), machine learning (ICML, ICLR, NeurIPS), and natural language processing (ACL, EMNLP, NAACL).",
+      "page": 13
+    },
+    {
+      "id": "P13-M4",
+      "type": "Method",
+      "text": "Seeds for data collection: Table 9 provides all seed entity and relation types used to collect CODEX. Each type is given first by its natural language label and then by its Wikidata unique ID: Entity IDs begin with Q, whereas relation (property) IDs begin with P.",
+      "page": 13
+    },
+    {
+      "id": "P13-L5",
+      "type": "Limitation",
+      "text": "Noticing that in the latter examples, the entity types matchup, but the statements are still false.",
+      "page": 13
+    },
+    {
+      "id": "P21-R1",
+      "type": "Result",
+      "text": "Table 13 presents the best link prediction hyperparameter configurations on CODEX-L, showing the performance of various models including RESCAL, TransE, ComplEx, ConvE, and TuckER. The best validation MRR achieved was 0.3091 with TuckER, indicating that this model outperforms others in this specific task. The configurations detail the embedding sizes, training types, optimization methods, and other hyperparameters used, providing a comprehensive overview of the experimental setup.",
+      "page": 21
+    },
+    {
+      "id": "P22-R2",
+      "type": "Result",
+      "text": "Table 14 outlines the best triple classification hyperparameter configurations on CODEX-S (hard negatives), detailing the validation accuracy achieved by different models. The highest accuracy of 0.8607 was obtained with ConvE, suggesting its superiority in this classification task. The table includes various hyperparameters such as embedding sizes, training types, and optimization methods, which are crucial for replicating the experiments.",
+      "page": 22
+    },
+    {
+      "id": "P23-R3",
+      "type": "Result",
+      "text": "Table 15 presents the best triple classification hyperparameter configurations on CODEX-M (hard negatives), where the highest validation accuracy recorded was 0.8292 with ConvE. This table also includes various hyperparameters such as embedding sizes, training types, and dropout rates, which are critical for understanding the model's performance and for future replication of the study.",
+      "page": 23
+    }
+  ],
+  "edges": [
+    {
+      "source": "P1-C1",
+      "target": "P1-B6",
+      "relation": "motivates",
+      "page": 1
+    },
+    {
+      "source": "P1-C4",
+      "target": "P1-C1",
+      "relation": "builds_on",
+      "page": 1
+    },
+    {
+      "source": "P1-E5",
+      "target": "P1-C4",
+      "relation": "contradicted_by",
+      "page": 1
+    },
+    {
+      "source": "P1-M7",
+      "target": "P1-C1",
+      "relation": "elaborates",
+      "page": 1
+    },
+    {
+      "source": "P1-E2",
+      "target": "P1-C1",
+      "relation": "supported_by",
+      "page": 1
+    },
+    {
+      "source": "P2-B10",
+      "target": "P1-C1",
+      "relation": "motivates",
+      "page": 2
+    },
+    {
+      "source": "P1-C8",
+      "target": "P1-C4",
+      "relation": "demonstrates",
+      "page": 1
+    },
+    {
+      "source": "P1-M3",
+      "target": "P1-E2",
+      "relation": "elaborates",
+      "page": 1
+    },
+    {
+      "source": "P1-C1",
+      "target": "P1-M3",
+      "relation": "leads_to",
+      "page": 1
+    },
+    {
+      "source": "P2-L9",
+      "target": "P1-C4",
+      "relation": "contradicted_by",
+      "page": 2
+    },
+    {
+      "source": "P1-C4",
+      "target": "P1-E5",
+      "relation": "supported_by",
+      "page": 1
+    },
+    {
+      "source": "P1-M7",
+      "target": "P1-C4",
+      "relation": "elaborates",
+      "page": 1
+    },
+    {
+      "source": "P13-L5",
+      "target": "P13-E1",
+      "relation": "addresses",
+      "page": 13
+    }
+  ]
+}
