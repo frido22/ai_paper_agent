@@ -48,7 +48,15 @@ def score(results: str, conclusion: str) -> Tuple[int, str]:
     )
     content = response.choices[0].message.content.strip()
 
-    # naive JSON parse without import json to keep deps minimal
+    # Handle markdown-wrapped JSON responses
+    if content.startswith("```json"):
+        # Extract JSON from markdown code blocks
+        start_idx = content.find("{")
+        end_idx = content.rfind("}") + 1
+        if start_idx != -1 and end_idx > start_idx:
+            content = content[start_idx:end_idx]
+
+    # Parse JSON response
     try:
         import json
         data = json.loads(content)
