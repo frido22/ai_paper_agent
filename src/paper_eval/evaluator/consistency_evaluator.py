@@ -17,8 +17,8 @@ _OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
 _PROMPT_TEMPLATE = (
     """You are an expert reviewer for scientific articles. On a scale from 0 to 100 "
     "rate how well the CONCLUSION section is fully supported by the RESULTS section. "
-    "Consider whether major claims in the conclusion are adequately backed by data "
-    "and figures. Return strictly JSON with keys 'score' (int) and 'justification'."""
+    "Give a brief justification on the score you gave."
+    "Return strictly JSON with keys 'score' (int) and 'justification'."""
 )
 
 
