@@ -6,17 +6,22 @@ import logging
 from typing import Optional
 
 
-def _search_arxiv_for_papers(query: str) -> Optional[str]:
+def _search_arxiv_for_papers(paper_title: str) -> Optional[str]:
     """
     Search arXiv for the given query and return the PDF URL of the top result, if any.
     """
     search = arxiv.Search(
-        query=query, max_results=1, sort_by=arxiv.SortCriterion.Relevance
+        query=paper_title, max_results=1, sort_by=arxiv.SortCriterion.Relevance
     )
     results = list(search.results())
-    if not results:
-        print(f"No results found for query: {query}")
+    if not results or len(results) == 0:
+        print(f"No results found for query: {paper_title}")
         return None
+    if paper_title.lower() not in results[0].title.lower():
+        # Ensure we found the correct paper
+        print(f"No results found for query: {paper_title}")
+        return None
+
     paper = results[0]
     print(
         f"Found paper: {paper.title}\nAuthors: {', '.join([a.name for a in paper.authors])}\nPublished: {paper.published.date()}\nPDF URL: {paper.pdf_url}"
@@ -40,17 +45,17 @@ def _dl(pdf_url: str, output_dir: str) -> None:
         print(f"Failed to download PDF. Status code: {response.status_code}")
 
 
-def download_arxiv_paper(query, output_dir="."):
+def download_arxiv_paper(paper_title: str, output_dir="."):
     """
     Search arXiv for the given query and download the PDF of the top result.
     """
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    pdf_url = _search_arxiv_for_papers(query)
+    pdf_url = _search_arxiv_for_papers(paper_title)
 
     if not pdf_url:
-        logging.error(f"No results found for query: {query}")
+        logging.error(f"No results found for query: {paper_title}")
         return
 
     _dl(pdf_url, output_dir)
@@ -58,6 +63,6 @@ def download_arxiv_paper(query, output_dir="."):
 
 if __name__ == "__main__":
     download_arxiv_paper(
-        query="A Fast Iterative Robust Principal Component Analysis Method",
+        paper_title="A Fast Iterative Robust Principal Component Analysis Method",
         output_dir=".",
     )
