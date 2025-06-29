@@ -91,6 +91,7 @@ def get_target_sections(
         sections = _pages_to_sections(raw)
     else:
         sections = raw
+        
 
     results    = _clean(sections.get("results", ""))
     conclusion = _clean(sections.get("conclusion", ""))
