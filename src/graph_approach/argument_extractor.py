@@ -12,23 +12,21 @@ import openai
 from .components import ArgumentComponent, ArgumentRelation, ArgumentGraph
 from .config import Config
 from .utils import (
-    clean_text, truncate_text, extract_json_from_response,
+    clean_text, extract_json_from_response,
     validate_component_data, validate_relation_data,
-    generate_component_id, merge_overlapping_components,
-    format_prompt_for_components, format_prompt_for_relationships
+    generate_component_id, merge_overlapping_components
 )
 
 
-def extract_argument_graph(pages: List[Dict[str, Any]]) -> Dict[str, Any]:
+def extract_argument_graph(pages: List[Any]) -> Dict[str, Any]:
     """
     Extract argumentative components from paper pages and build a graph structure.
     
     Args:
-        pages: List of dictionaries, each representing a page with keys:
+        pages: List of PageData objects from ingestion pipeline, each with:
                - page_number (int)
                - text (str)
                - tables (list)
-               - text_stats (dict)
     
     Returns:
         Dictionary containing:
@@ -74,7 +72,7 @@ def extract_argument_graph(pages: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def _extract_from_chunk(
-    chunk_pages: List[Dict[str, Any]], 
+    chunk_pages: List[Any], 
     existing_nodes: List[ArgumentComponent], 
     existing_edges: List[ArgumentRelation],
     client: openai.OpenAI
@@ -83,7 +81,7 @@ def _extract_from_chunk(
     Extract components and relationships from a chunk of pages.
     
     Args:
-        chunk_pages: List of pages to process in this chunk
+        chunk_pages: List of PageData objects to process in this chunk
         existing_nodes: Previously extracted components for context
         existing_edges: Previously extracted relationships for context
         client: OpenAI client instance
@@ -115,12 +113,12 @@ def _extract_from_chunk(
     return components, relationships
 
 
-def _combine_chunk_text(chunk_pages: List[Dict[str, Any]]) -> str:
+def _combine_chunk_text(chunk_pages: List[Any]) -> str:
     """
     Combine text from multiple pages in a chunk.
     
     Args:
-        chunk_pages: List of pages in the chunk
+        chunk_pages: List of PageData objects in the chunk
     
     Returns:
         Combined text with page separators
@@ -136,7 +134,7 @@ def _combine_chunk_text(chunk_pages: List[Dict[str, Any]]) -> str:
 
 def _extract_components_from_chunk(
     combined_text: str, 
-    chunk_pages: List[Dict[str, Any]], 
+    chunk_pages: List[Any], 
     existing_nodes: List[ArgumentComponent],
     client: openai.OpenAI
 ) -> List[ArgumentComponent]:
@@ -152,8 +150,6 @@ def _extract_components_from_chunk(
     Returns:
         List of ArgumentComponent objects
     """
-    # Truncate text to fit API limits
-    truncated_text = truncate_text(combined_text)
     
     # Prepare context from existing components
     context_summary = _prepare_context_summary(existing_nodes)
@@ -164,7 +160,7 @@ def _extract_components_from_chunk(
     {context_summary}
     
     Text to analyze:
-    {truncated_text}
+    {combined_text}
     
     Return your analysis as a JSON array with the following structure:
     [
@@ -175,6 +171,12 @@ def _extract_components_from_chunk(
             "justification": "detailed explanation of why this constitutes the specified component type"
         }}
     ]
+    
+    IMPORTANT:
+    - Only use the following types exactly as written (case-sensitive): Claim, Evidence, Conclusion, Counterclaim, Background, Method, Result, Limitation.
+    - Do NOT use all uppercase (e.g., 'EVIDENCE') or all lowercase (e.g., 'evidence').
+    - If you are unsure, pick the closest matching type from the list above.
+    - Responses with invalid or misspelled types will be rejected.
     
     COMPONENT TYPE GUIDELINES:
     
@@ -235,8 +237,9 @@ def _extract_components_from_chunk(
     - Consider the logical flow and coherence of the extracted text
     - Avoid overlapping or redundant components
     - Focus on the most significant and well-developed argumentative elements
-    - Limit to 10-15 high-quality components per chunk
+    - Focus on high-quality, meaningful components that contribute to the argument structure
     - Ensure each component has clear justification for its classification
+    - Aim to extract at least 25 components
     """
     
     try:
@@ -245,9 +248,7 @@ def _extract_components_from_chunk(
             messages=[
                 {"role": "system", "content": "You are an expert academic paper analyst specializing in argumentative structure extraction. You excel at identifying comprehensive argumentative components that capture complete logical units rather than fragmented sentences. You understand the nuances of academic writing and can distinguish between different types of argumentative elements with high precision."},
                 {"role": "user", "content": prompt}
-            ],
-            temperature=Config.OPENAI_TEMPERATURE,
-            max_tokens=Config.OPENAI_MAX_TOKENS
+            ]
         )
         
         content = response.choices[0].message.content
@@ -307,7 +308,7 @@ def _extract_components_from_chunk(
 
 def _extract_relationships_from_chunk(
     combined_text: str, 
-    chunk_pages: List[Dict[str, Any]], 
+    chunk_pages: List[Any], 
     chunk_components: List[ArgumentComponent], 
     existing_nodes: List[ArgumentComponent], 
     existing_edges: List[ArgumentRelation],
@@ -330,9 +331,6 @@ def _extract_relationships_from_chunk(
     if len(chunk_components) < 1:
         return []
     
-    # Truncate text to fit API limits
-    truncated_text = truncate_text(combined_text)
-    
     # Prepare context from existing components and relationships
     context_summary = _prepare_context_summary(existing_nodes, existing_edges)
     
@@ -346,7 +344,7 @@ def _extract_relationships_from_chunk(
     {context_summary}
     
     Text:
-    {truncated_text}
+    {combined_text}
     
     All components (existing + new):
     {json.dumps(component_data, indent=2)}
@@ -366,6 +364,12 @@ def _extract_relationships_from_chunk(
             "explanation": "detailed explanation of how these components are logically connected"
         }}
     ]
+    
+    IMPORTANT:
+    - Only use the following relationship types exactly as written (case-sensitive): supported_by, contradicted_by, leads_to, elaborates, addresses, compares_to, builds_on, motivates, demonstrates.
+    - Do NOT use all uppercase (e.g., 'SUPPORTED_BY') or all lowercase (e.g., 'supported_by').
+    - If you are unsure, pick the closest matching type from the list above.
+    - Responses with invalid or misspelled relationship types will be rejected.
     
     RELATIONSHIP TYPES:
     
@@ -444,7 +448,8 @@ def _extract_relationships_from_chunk(
     - Connect components that are only superficially related
     
     Quality over quantity:
-    - Focus on 10-20 high-quality, meaningful relationships per chunk
+    - Aim to extract at least 20 relationships
+    - Focus on high-quality, meaningful relationships
     - Each relationship should provide clear insight into the paper's logic
     - Ensure relationships are well-justified and specific
     - Prefer relationships that span different component types
@@ -456,9 +461,7 @@ def _extract_relationships_from_chunk(
             messages=[
                 {"role": "system", "content": "You are an expert in academic argument analysis and logical relationship identification. You excel at uncovering the deep logical connections between argumentative components, revealing how academic papers build coherent arguments through various types of relationships. You focus on meaningful, non-trivial connections that illuminate the paper's reasoning structure."},
                 {"role": "user", "content": prompt}
-            ],
-            temperature=Config.OPENAI_TEMPERATURE,
-            max_tokens=Config.OPENAI_MAX_TOKENS
+            ]
         )
         
         content = response.choices[0].message.content
@@ -518,7 +521,7 @@ def _prepare_context_summary(
     
     # Summarize existing components
     component_summary = []
-    for node in existing_nodes[-10:]:  # Show last 10 components for context
+    for node in existing_nodes:  # Show last 10 components for context
         component_summary.append({
             'id': node.id,
             'type': node.type,
@@ -534,7 +537,7 @@ def _prepare_context_summary(
     # Add relationship summary if provided
     if existing_edges:
         relation_summary = []
-        for edge in existing_edges[-10:]:  # Show last 10 relationships for context
+        for edge in existing_edges:  # Show last 10 relationships for context
             relation_summary.append({
                 'source': edge.source,
                 'target': edge.target,
@@ -550,7 +553,7 @@ def _prepare_context_summary(
     return context
 
 
-def _infer_page_number(text: str, chunk_pages: List[Dict[str, Any]]) -> int:
+def _infer_page_number(text: str, chunk_pages: List[Any]) -> int:
     """
     Infer the page number for a component based on its text content.
     

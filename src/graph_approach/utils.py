@@ -34,60 +34,6 @@ def clean_text(text: str) -> str:
     return text
 
 
-def truncate_text(text: str, max_length: int = None) -> str:
-    """
-    Truncate text to a maximum length.
-    
-    Args:
-        text: Text to truncate
-        max_length: Maximum length (uses Config.MAX_TEXT_LENGTH if None)
-        
-    Returns:
-        Truncated text
-    """
-    if max_length is None:
-        max_length = Config.MAX_TEXT_LENGTH
-    
-    if len(text) <= max_length:
-        return text
-    
-    # Try to truncate at a sentence boundary
-    sentences = re.split(r'[.!?]+', text)
-    truncated = ""
-    
-    for sentence in sentences:
-        if len(truncated + sentence) <= max_length:
-            truncated += sentence + "."
-        else:
-            break
-    
-    if not truncated:
-        # If no sentence fits, truncate at word boundary
-        words = text.split()
-        truncated = ""
-        for word in words:
-            if len(truncated + word + " ") <= max_length:
-                truncated += word + " "
-            else:
-                break
-        truncated = truncated.strip()
-    
-    return truncated
-
-
-def truncate_chunk_text(text: str) -> str:
-    """
-    Truncate text specifically for chunk processing.
-    
-    Args:
-        text: Text to truncate
-        
-    Returns:
-        Truncated text
-    """
-    return truncate_text(text, Config.MAX_CHUNK_TEXT_LENGTH)
-
-
 def extract_json_from_response(response_text: str) -> Optional[List[Dict[str, Any]]]:
     """
     Extract JSON array from OpenAI response text.
@@ -132,8 +78,6 @@ def validate_component_data(component_data: Dict[str, Any]) -> List[str]:
         text = component_data['text']
         if not isinstance(text, str):
             errors.append("'text' must be a string")
-        elif len(text.strip()) < Config.MIN_COMPONENT_LENGTH:
-            errors.append(f"Text too short (minimum {Config.MIN_COMPONENT_LENGTH} characters)")
     
     if 'type' in component_data:
         valid_types = [
@@ -331,7 +275,7 @@ def format_prompt_for_components(text: str) -> str:
     - Background: Contextual information that sets the stage
     - Be precise with text spans - use exact quotes
     - Identify the most important argumentative elements
-    - Limit to the most significant components (max 10-15 per page)
+    - Focus on high-quality, meaningful components that contribute to the argument structure
     """
 
 
@@ -350,7 +294,7 @@ def format_prompt_for_relationships(text: str, components: List[Dict[str, Any]])
     Analyze the following text and identify logical relationships between the argumentative components.
     
     Text:
-    {truncate_text(text)}
+    {(text)}
     
     Identified components:
     {json.dumps(components, indent=2)}
@@ -402,7 +346,7 @@ def format_chunk_prompt_for_components(text: str, context_summary: str = "") -> 
     {context_summary}
     
     Text to analyze:
-    {truncate_chunk_text(text)}
+    {(text)}
     
     Return your analysis as a JSON array with the following structure:
     [
@@ -422,8 +366,7 @@ def format_chunk_prompt_for_components(text: str, context_summary: str = "") -> 
     - Background: Contextual information that sets the stage
     - Be precise with text spans - use exact quotes
     - Identify the most important argumentative elements
-    - Consider how new components relate to previously identified ones
-    - Limit to the most significant components (max {Config.MAX_COMPONENTS_PER_CHUNK} per chunk)
+    - Focus on high-quality, meaningful components that contribute to the argument structure
     """
 
 
@@ -449,7 +392,7 @@ def format_chunk_prompt_for_relationships(
     {context_summary}
     
     Text:
-    {truncate_chunk_text(text)}
+    {(text)}
     
     All components (existing + new):
     {json.dumps(components, indent=2)}
@@ -480,7 +423,6 @@ def format_chunk_prompt_for_relationships(
     1. Relationships between new components in this chunk
     2. Relationships between new components and existing components
     3. The most important and clear relationships
-    4. Avoid creating too many connections (max {Config.MAX_RELATIONSHIPS_PER_CHUNK} per chunk)
     """
 
 
@@ -503,7 +445,7 @@ def prepare_context_summary(
     
     # Summarize existing components
     component_summary = []
-    for comp in existing_components[-Config.MAX_CONTEXT_COMPONENTS:]:
+    for comp in existing_components:
         component_summary.append({
             'id': comp['id'],
             'type': comp['type'],
@@ -519,7 +461,7 @@ def prepare_context_summary(
     # Add relationship summary if provided
     if existing_relationships:
         relation_summary = []
-        for rel in existing_relationships[-Config.MAX_CONTEXT_RELATIONSHIPS:]:
+        for rel in existing_relationships:
             relation_summary.append({
                 'source': rel['source'],
                 'target': rel['target'],
