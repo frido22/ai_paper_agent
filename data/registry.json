@@ -1,0 +1,16 @@
+{
+  "87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd": {
+    "document_name": "2009.07810v2.pdf",
+    "document_path": "data/2009.07810v2.pdf",
+    "content_hash": "87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd",
+    "date_ingestion": "2025-06-29",
+    "metadata": {
+      "name": "2009.07810v2.pdf",
+      "size": "524577"
+    },
+    "pages_count": 23,
+    "total_text_length": 65397,
+    "total_tables_count": 1,
+    "processed_output_dir": "data/processed/87952db49d78cd5cd6c4077194902c3b61783b162dd41fad51ffa09c06e580bd"
+  }
+}
